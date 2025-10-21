@@ -1,0 +1,27 @@
+package LibrosBiblio;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class AppConsultaLibros {
+
+	public static void main(String[] args) {
+		Statement st= null;
+		ResultSet rs=null;
+		String sql="Select isbn, titulo, autor, precio from Libros where precio <=40";
+		try {
+			AccesoDatos ac= new AccesoDatos("biblios");
+			Connection cn=	ac.getConnection();
+			st=cn.createStatement();
+			rs=st.executeQuery(sql);
+			while(rs.next()) {
+				Libro libro=new Libro(rs.getString("isbn"), rs.getString("titulo"), rs.getString("autor"), rs.getDouble("precio"));
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la consulta "+e.getMessage());
+		}finally {
+			
+		}
+	}
+}

@@ -1,0 +1,33 @@
+package actividad1;
+
+import java.security.KeyStore.Entry;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+
+public class Taller {
+	private Map <Matricula, Vehiculo> vehiculos;
+
+	public Taller() {
+		
+		this.vehiculos = new Hashtable<>();
+	}
+	
+	public void añadirVehiculo(Vehiculo v) {
+		
+		/*put(clave, valor) -> devuelve null
+		 * si el vehiculo era null
+		 * (no habia vehiculo asociado) o el anterior
+		 * vehiculo asociado a la matricula era null*/
+		vehiculos.put(v.getMatricula(), v);
+	}
+	
+	public void mostrarVehiculos() {
+		//itero por el map
+		//entrySet(): set de Entrys con los pares
+		
+		for(Entry<Matricula, Vehiculo> entry: vehiculos.entrySet()) {
+			
+		}
+	}
+}

@@ -1,0 +1,122 @@
+package LibrosBiblio;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class AppCrudBiblio {
+	
+	public static void insertarLibro(Connection c, Libro l) {
+		
+		//insertar los datos en la base de datos
+		boolean nRegistros;
+		Statement st;
+		String sql = "Insert into libros (isbn,titulo,autor,precio) values ('" + l.getIsbn() + "','" + l.getTitulo()
+				+ "','" + l.getAutor() + "'," + l.getPrecio() + ")";
+		try {
+			st=c.createStatement();
+			
+			nRegistros=st.execute(sql);
+			if(!nRegistros) {
+                System.out.println("Registro insertado");
+                } else {
+                	System.out.println("No se ha podido insertar");
+                }
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error al insertar " + e.getMessage());
+		}
+	}
+	
+	public static void borrarAutor(Connection c, String autor) {
+        boolean nRegistros;
+        Statement st;
+        String sql = "delete from libros where autor='" + autor + "'";
+        try {
+            st=c.createStatement();
+            
+            nRegistros=st.execute(sql);
+            if(!nRegistros) {
+                System.out.println("Registro borrado");
+                } else {
+                	System.out.println("No se ha podido borrar");
+                }
+            st.close();
+        } catch (Exception e) {
+            System.out.println("Error al borrar " + e.getMessage());
+        }
+    }
+
+	public static void main(String[] args) {
+
+		Statement st = null;
+		int opcion = 0;
+		Scanner sc = null;
+		AccesoDatos ac = null;
+		Connection conexionCrud = null;
+		double precioUsuario = 0.0;
+		String sql3 = "select titulo,autor,precio from Libros where precio>=";
+		ResultSet rs = null;
+		Libro l1 = null;
+		String isbn = null;
+		String titulo = null;
+		String autor = null;
+		try {
+			ac = new AccesoDatos("biblios");
+			conexionCrud = ac.getConnection();
+			st = conexionCrud.createStatement();
+			sc = new Scanner(System.in);
+			System.out.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Actualizar Precio\n4.Consultar Precio");
+			opcion = sc.nextInt();
+
+			while (opcion != 0) {
+
+				switch (opcion) {
+				case 1:
+					System.out.println("Introduzca isbn, titulo, autor, precio");
+					isbn = sc.next();
+					titulo = sc.next();	
+					autor = sc.next();
+					precioUsuario = sc.nextDouble();
+					l1 = new Libro(isbn, titulo, autor, precioUsuario);
+					insertarLibro(conexionCrud, l1);
+					break;
+				case 2:
+					System.out.println("Introduzca autor a borrar");
+					autor = sc.next();
+					borrarAutor(conexionCrud, autor);
+					break;
+				case 3:
+				    System.out.println("Introduzca el precio a consultar");
+				    precioUsuario = sc.nextDouble();
+				    rs = st.executeQuery(sql3 + precioUsuario);
+				    while (rs.next()) {
+				        l1 = new Libro(rs.getString("titulo"), rs.getString("autor"), rs.getDouble("precio"));
+				        System.out.println(l1.toString()); 
+				    }
+				    rs.close(); 
+				    break;
+				case 4:
+					break;
+				case 0:
+					System.out.println("Fin de operaciones SQL");
+				default:
+					System.out.println("Opcion no valida");
+				}
+				System.out
+						.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Actualizar Precio\n4.Consultar Precio");
+				opcion = sc.nextInt();
+			}
+			rs.close();
+			st.close();
+			sc.close();
+
+		} catch (Exception e) {
+			System.out.println("Error en la conexion " + e.getMessage());
+		} finally {
+			
+		}
+	}
+	
+}

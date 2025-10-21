@@ -1,0 +1,57 @@
+package Principal;
+
+public class Coche {
+	private int id;
+	private String marca;
+	private String modelo;
+	
+	public Coche(int id, String marca, String modelo) {
+		this.id = id;
+		this.marca = marca;
+		this.modelo = modelo;
+	}
+	/**
+	 * Recibe una linea con el formato id;marca;modelo
+	 * Lanza excepcion si la linea esta mal formada
+	 */
+	public Coche(String linea) {
+        //parto la linea por los ;
+		String[] trozos = linea.split(";");
+		if (trozos.length != 3) {
+		    throw new LineaMalFormadaException(linea);
+		}
+		        
+    }
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	
+	public String toString() {
+		return "Coche [id=" + id + ", marca=" + marca + ", modelo=" + modelo + "]";
+	}
+	
+	public String serialize() {
+		return id + "," + marca + "," + modelo;
+	}
+}

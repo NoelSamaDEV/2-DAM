@@ -1,0 +1,9 @@
+package Logica;
+
+public class vehiculo {
+	private String matricula;
+	private String modelo;
+	private int km;
+	
+	
+}

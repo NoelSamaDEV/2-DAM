@@ -1,0 +1,60 @@
+package parte2_1;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Ejercicio2b {
+
+	public static void main(String[] args) {
+		
+		BufferedReader buffer = null;
+		List<Restaurante> l = null;
+		try {
+			buffer =new BufferedReader(new FileReader(Ejercicio1.RESTAURANTES));
+			l= leeFichero(buffer);
+			try {
+				imprimeCodigoPostal6(buffer);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(buffer!=null) {
+				try {
+					buffer.close();
+				} catch (IOException e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		if(l!=null) {
+			imprimeCodigoPostal6(buffer);
+		}
+	}
+	private static List<Restaurante> leeFichero(BufferedReader buffer) throws IOException{
+		String linea =buffer.readLine();
+		List<Restaurante> l = new LinkedList<>();
+		linea= buffer.readLine();
+		while(linea!=null) {
+			Restaurante r = Restaurante.parse(linea);
+			l.add(r);
+			linea= buffer.readLine();	
+			}
+		return l;
+	}
+	
+	private static void imprimeCodigoPostal6(BufferedReader buffer) throws IOException {
+		for (Restaurante r: iterable) {
+			
+		}
+	}
+
+}

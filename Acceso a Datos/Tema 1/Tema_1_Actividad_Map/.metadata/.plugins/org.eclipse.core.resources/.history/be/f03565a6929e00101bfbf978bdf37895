@@ -1,0 +1,12 @@
+package actividad1;
+
+public class Taller {
+	private Map <Matricula, Vehiculo> vehiculos;
+
+	public Taller(Map<Matricula, Vehiculo> vehiculos) {
+		super();
+		this.vehiculos = new Hashtable<>();
+	}
+	
+	
+}

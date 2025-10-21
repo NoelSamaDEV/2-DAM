@@ -1,0 +1,161 @@
+package LibrosBiblio;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class AppCrudBiblio {
+	private static Connection conexionCrud; // usamos esta variable estática correctamente
+	
+	// ---- INSERTAR ----
+	public static void insertarLibro(Connection c, Libro l) {
+		Statement st = null;
+		String sql = "INSERT INTO libros (isbn, titulo, autor, precio) VALUES ('"
+				+ l.getIsbn() + "', '" + l.getTitulo() + "', '" + l.getAutor() + "', " + l.getPrecio() + ")";
+		try {
+			st = c.createStatement();
+			int nRegistros = st.executeUpdate(sql); // CORREGIDO: usamos executeUpdate
+			if (nRegistros > 0) {
+				System.out.println("Registro insertado correctamente.");
+			} else {
+				System.out.println("No se ha podido insertar.");
+			}
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error al insertar: " + e.getMessage());
+		}
+	}
+
+	// ---- BORRAR ----
+	public static void borrarAutor(Connection c, String autor) {
+		Statement st = null;
+		String sql = "DELETE FROM libros WHERE autor='" + autor + "'";
+		try {
+			st = c.createStatement();
+			int nRegistros = st.executeUpdate(sql); // CORREGIDO
+			if (nRegistros > 0) {
+				System.out.println("Registros borrados: " + nRegistros);
+			} else {
+				System.out.println("No se ha podido borrar.");
+			}
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error al borrar: " + e.getMessage());
+		}
+	}
+
+	// ---- ACTUALIZAR ----
+	public static void actualizarPrecios(Connection c, double prec, double desc) {
+		Statement st = null;
+		String sql = "UPDATE libros SET precio = precio - precio * " + desc + " WHERE precio > " + prec;
+		try {
+			st = c.createStatement();
+			int nRegistros = st.executeUpdate(sql); // CORREGIDO
+			if (nRegistros > 0) {
+				System.out.println("Registros actualizados: " + nRegistros);
+			} else {
+				System.out.println("No se ha podido actualizar.");
+			}
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error al actualizar precios: " + e.getMessage());
+		}
+	}
+
+	// ---- MAIN ----
+	public static void main(String[] args) {
+
+		Statement st = null;
+		int opcion = 0;
+		Scanner sc = null;
+		AccesoDatos ac = null;
+		ResultSet rs = null;
+		Libro l1 = null;
+
+		String isbn, titulo, autor;
+		double precioUsuario, descuento;
+
+		try {
+			ac = new AccesoDatos("biblios");
+			conexionCrud = ac.getConnection(); // guardamos en la variable estática
+			st = conexionCrud.createStatement();
+			sc = new Scanner(System.in);
+
+			do {
+				System.out.println("\nSeleccione una opción:");
+				System.out.println("1. Insertar");
+				System.out.println("2. Borrar por autor");
+				System.out.println("3. Consultar por precio mínimo");
+				System.out.println("4. Actualizar precios");
+				System.out.println("0. Salir");
+
+				opcion = sc.nextInt();
+				sc.nextLine(); // limpiar buffer
+
+				switch (opcion) {
+				case 1:
+					System.out.println("Introduzca ISBN:");
+					isbn = sc.nextLine();
+					System.out.println("Introduzca título:");
+					titulo = sc.nextLine();
+					System.out.println("Introduzca autor:");
+					autor = sc.nextLine();
+					System.out.println("Introduzca precio:");
+					precioUsuario = sc.nextDouble();
+
+					l1 = new Libro(isbn, titulo, autor, precioUsuario);
+					insertarLibro(conexionCrud, l1);
+					break;
+
+				case 2:
+					System.out.println("Introduzca el autor a borrar:");
+					autor = sc.nextLine();
+					borrarAutor(conexionCrud, autor);
+					break;
+
+				case 3:
+					System.out.println("Introduzca el precio mínimo a consultar:");
+					precioUsuario = sc.nextDouble();
+					String sqlConsulta = "SELECT titulo, autor, precio FROM libros WHERE precio >= " + precioUsuario;
+
+					rs = st.executeQuery(sqlConsulta);
+					boolean hayResultados = false;
+					while (rs.next()) {
+						hayResultados = true;
+						System.out.println("Título: " + rs.getString("titulo") + 
+								" | Autor: " + rs.getString("autor") + 
+								" | Precio: " + rs.getDouble("precio"));
+					}
+					if (!hayResultados) {
+						System.out.println("No se encontraron libros con ese precio mínimo.");
+					}
+					rs.close();
+					break;
+
+				case 4:
+					System.out.println("Introduzca el precio mínimo para aplicar descuento:");
+					precioUsuario = sc.nextDouble();
+					System.out.println("Introduzca el descuento (ej. 0.1 para 10%):");
+					descuento = sc.nextDouble();
+					actualizarPrecios(conexionCrud, precioUsuario, descuento);
+					break;
+
+				case 0:
+					System.out.println("Fin de operaciones SQL.");
+					break;
+
+				default:
+					System.out.println("Opción no válida.");
+				}
+			} while (opcion != 0);
+
+			st.close();
+			conexionCrud.close();
+
+		} catch (Exception e) {
+			System.out.println("Error en la conexión o ejecución: " + e.getMessage());
+		}
+	}
+}
+

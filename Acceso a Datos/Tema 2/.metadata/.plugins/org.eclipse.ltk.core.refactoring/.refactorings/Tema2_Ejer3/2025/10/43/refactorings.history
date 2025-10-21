@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;LineaMalFormadaException.java&apos; to &apos;Tema2_Ejer3/src/excepciones&apos;&#x0D;&#x0A;- Original project: &apos;Tema2_Ejer3&apos;&#x0D;&#x0A;- Destination element: &apos;Tema2_Ejer3/src/excepciones&apos;&#x0D;&#x0A;- Original element: &apos;Principal.LineaMalFormadaException.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;excepciones" element1="/src&lt;Principal{LineaMalFormadaException.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1760949908749" units="1" version="1.0"/>
+</session>

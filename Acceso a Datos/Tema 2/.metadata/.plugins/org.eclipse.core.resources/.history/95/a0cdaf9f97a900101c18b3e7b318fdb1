@@ -1,0 +1,16 @@
+package gestores;
+
+public interface Documentable {
+	/**
+	 * Recibe una linea del fichero y devuelve un objeto de tipo restaurante
+	 */
+	static Documentable parse(String linea) {
+		throw new UnsupportedOperationException("Implementame");
+	}
+	
+	/**
+	 * Devuelve la linea que iria al fichero
+	 */
+	
+	abstract String aFichero();
+}

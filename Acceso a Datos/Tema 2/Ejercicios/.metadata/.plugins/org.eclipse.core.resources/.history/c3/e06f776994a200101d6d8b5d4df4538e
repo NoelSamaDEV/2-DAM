@@ -1,0 +1,67 @@
+package parte2_1;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Ejercicio2b {
+
+	public static void main(String[] args) {
+		
+		BufferedReader buffer = null;
+		try {
+			buffer =new BufferedReader(new FileReader(Ejercicio1.RESTAURANTES));
+			try {
+				imprimeCodigoPostal6(buffer);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(buffer!=null) {
+				try {
+					buffer.close();
+				} catch (IOException e) {
+					// TODO: handle exception
+				}
+			}
+		}
+	}
+	private static List<Restaurante> leeFichero(BufferedReader buffer) throws IOException{
+		String linea =buffer.readLine();
+		List<Restaurante> l = new LinkedList<>();
+		linea= buffer.readLine();
+		while(linea!=null) {
+			Restaurante r = Restaurante.parse(linea);
+			l.add(r);
+			linea= buffer.readLine();	
+			}
+		return l;
+	}
+	
+	private static void imprimeCodigoPostal6(BufferedReader buffer) throws IOException {
+		String linea = buffer.readLine();
+		linea =buffer.readLine();
+		while(linea!=null) {
+			//tarto la linea
+			//informacion separada por comas: rompo por comas
+			String[] trozos = linea.split(",");
+			//saco lo primero y lo ultimo
+			String restaurante = trozos[0];
+			String zipcode =trozos[trozos.length-1];
+			//miro si el codigo postal empieza por 6
+			if(zipcode.charAt(0)=='6') {
+				System.out.println(restaurante + " "+ zipcode);
+			}
+			linea =buffer.readLine();//lee siguiente linea
+		}
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;LibrosBiblio.AppConsultaLibors&apos; to &apos;AppConsultaLibros&apos;&#x0D;&#x0A;- Original project: &apos;jdbcDam&apos;&#x0D;&#x0A;- Original element: &apos;LibrosBiblio.AppConsultaLibors&apos;&#x0D;&#x0A;- Renamed element: &apos;LibrosBiblio.AppConsultaLibros&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;AppConsultaLibors&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;LibrosBiblio{AppConsultaLibors.java[AppConsultaLibors" matchStrategy="1" name="AppConsultaLibros" qualified="false" references="true" similarDeclarations="false" stamp="1759997432362" textual="false" version="1.0"/>
+</session>

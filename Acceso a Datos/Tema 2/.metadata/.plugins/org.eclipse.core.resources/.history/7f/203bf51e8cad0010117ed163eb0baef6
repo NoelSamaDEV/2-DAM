@@ -1,0 +1,34 @@
+package Persistencia;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.List;
+
+import Principal.Coche;
+
+public class PersistenciaCSV implements persistencia {
+
+	@Override
+	public void leerCoches(String nombreFichero, List<Coche> listaCoches) {
+		BufferedReader br = null;
+		try {
+			br= new BufferedReader(new FileReader(new File(nombreFichero)));
+			String linea= BufferedReader.readLine();
+			linea= BufferedReader.readLine();
+			while (linea != null) {
+				Coche c= new Coche(linea);
+				
+				linea= BufferedReader.readLine();
+			}
+		}
+		catch (Exception e) {
+			System.out.println("Error al leer el fichero: " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void escribirCoches(String nombreFichero, List<Coche> listaCoches) {
+		
+	}
+
+}

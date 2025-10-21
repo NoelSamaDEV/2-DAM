@@ -1,0 +1,8 @@
+package Ejercicios;
+
+import java.io.File;
+
+public class Ejercicio4 {
+	
+	File f= new File(Ejercicio1.RUTA);
+}

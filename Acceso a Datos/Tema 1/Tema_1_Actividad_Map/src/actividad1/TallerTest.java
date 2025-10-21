@@ -1,0 +1,28 @@
+package actividad1;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TallerTest {
+
+	@Test
+	/**
+	 * Cuando se crea el taller no hay vehiculos
+	 */
+	void TallerVacioTest() {
+		Taller t =new Taller();
+		//MIRO QUE EL MAP NO ES NULO
+		assertTrue(t.getVehiculos()!=null);
+		
+		assertEquals(0, t.getVehiculos().size());
+	}
+	
+	/*@Test
+	void tallerConUnVehiculoTest() {
+		Taller t = new Taller();
+		try{
+			Vehiculo
+		}
+	}*/
+}

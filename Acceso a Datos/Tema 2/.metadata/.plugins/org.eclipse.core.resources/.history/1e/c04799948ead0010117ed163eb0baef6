@@ -1,0 +1,37 @@
+package Principal;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import Persistencia.PersistenciaCSV;
+
+public class Concesionario {
+	
+	private List<Coche> listaCoches;
+	
+	public Concesionario(String nombreFicheroOrigen) {
+		// Hay que arrancar el atributo para que la persistencia lo modifique
+		listaCoches = new LinkedList<>();
+		new PersistenciaCSV().leerCoches(nombreFicheroOrigen, listaCoches);
+	}
+
+	public String listarCoches() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void NuevoCoche(String marca, String modelo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String listarCochesPorMarca(String marca) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void guardarDatos(String nombreFicheroDestino) {
+		// TODO Auto-generated method stub
+		
+	}
+}

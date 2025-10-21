@@ -1,0 +1,167 @@
+package LibrosBiblio;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class AppCrudBiblio {
+	private static Connection conexionCrud;
+	
+	public static void insertarLibro(Libro l1) {
+		String sql = "Insert into libros (isbn,titulo,autor,precio) values (?,?,?,?)";
+		PreparedStatement ps=null;
+		int numRegistros=0;
+		try {
+			ps=conexionCrud.prepareStatement(sql);
+			//Cargar los parametros
+			ps.setString(1,l1.getIsbn());
+			ps.setString(2,l1.getTitulo());
+			ps.setString(3,l1.getAutor());
+			ps.setDouble(4,l1.getPrecio());
+			//ejecutare la instruccion
+			numRegistros=ps.executeUpdate();
+			if(numRegistros>0) {
+                System.out.println("Registro insertado");
+			} else {
+				System.out.println("No se ha podido insertar");
+			}
+		} catch (Exception e) {
+			System.out.println("Error al insertar " + e.getMessage());
+		}
+	}
+	public static void insertarLibro(Connection c, Libro l) {
+		
+		//insertar los datos en la base de datos
+		boolean nRegistros;
+		Statement st;
+		String sql = "Insert into libros (isbn,titulo,autor,precio) values ('" + l.getIsbn() + "','" + l.getTitulo()
+				+ "','" + l.getAutor() + "'," + l.getPrecio() + ")";
+		try {
+			st=c.createStatement();
+			
+			nRegistros=st.execute(sql);
+			if(!nRegistros) {
+                System.out.println("Registro insertado");
+                } else {
+                	System.out.println("No se ha podido insertar");
+                }
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error al insertar " + e.getMessage());
+		}
+	}
+	
+	public static void borrarAutor(Connection c, String autor) {
+        boolean nRegistros;
+        Statement st;
+        String sql = "delete from libros where autor='" + autor + "'";
+        try {
+            st=c.createStatement();
+            
+            nRegistros=st.execute(sql);
+            if(!nRegistros) {
+                System.out.println("Registro borrado");
+                } else {
+                	System.out.println("No se ha podido borrar");
+                }
+            st.close();
+        } catch (Exception e) {
+            System.out.println("Error al borrar " + e.getMessage());
+        }
+    }
+	
+	public static void actualizarPrecios(Connection c, double prec, double desc) {
+	    Statement st = null;
+	    String sql = "UPDATE libros SET precio = precio - precio * " + desc + " WHERE precio > " + prec;
+	    try {
+	        st = c.createStatement();
+	        int n = st.executeUpdate(sql);
+	        System.out.println(n > 0 ? "Registros actualizados: " + n : "No se ha podido actualizar");
+	    } catch (Exception e) {
+	        System.out.println("Error al actualizar precios " + e.getMessage());
+	    } finally {
+	        try { if (st != null) st.close(); } catch (Exception ignore) {}
+	    }
+	}
+
+
+	public static void main(String[] args) {
+
+		Statement st = null;
+		int opcion = 0;
+		Scanner sc = null;
+		AccesoDatos ac = null;
+		Connection conexionCrud = null;
+		double descuento;
+		double precioUsuario = 0.0;
+		String sql3 = "select titulo,autor,precio from Libros where precio>=";
+		ResultSet rs = null;
+		Libro l1 = null;
+		String isbn = null;
+		String titulo = null;
+		String autor = null;
+		try {
+			ac = new AccesoDatos("biblios");
+			conexionCrud = ac.getConnection();
+			st = conexionCrud.createStatement();
+			sc = new Scanner(System.in);
+			System.out.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Consultar Precio\n4.Actualizar Precio");
+			opcion = sc.nextInt();
+
+			while (opcion != 0) {
+
+				switch (opcion) {
+				case 1:
+					System.out.println("Introduzca isbn, titulo, autor, precio");
+					isbn = sc.next();
+					titulo = sc.next();	
+					autor = sc.next();
+					precioUsuario = sc.nextDouble();
+					l1 = new Libro(isbn, titulo, autor, precioUsuario);
+					//insertarLibro(conexionCrud, l1);
+					insertarLibro(l1);
+					break;
+				case 2:
+					System.out.println("Introduzca autor a borrar");
+					autor = sc.next();
+					borrarAutor(conexionCrud, autor);
+					break;
+				case 3:
+				    System.out.println("Introduzca el precio a consultar");
+				    precioUsuario = sc.nextDouble();
+				    rs = st.executeQuery(sql3 + precioUsuario);
+				    while (rs.next()) {
+				        l1 = new Libro(rs.getString("isbn"),rs.getString("titulo"), rs.getString("autor"), rs.getDouble("precio"));
+				        System.out.println(l1.toString()); 
+				    }
+				    rs.close(); 
+				    break;
+				case 4:
+					System.out.println("Introduzca el precio");
+					precioUsuario = sc.nextDouble();
+					System.out.println("Introduzca el descuento");
+					descuento = sc.nextDouble();
+					actualizarPrecios(conexionCrud, precioUsuario, descuento);
+				
+					break;
+				case 0:
+					System.out.println("Fin de operaciones SQL");
+				default:
+					System.out.println("Opcion no valida");
+				}
+				System.out
+						.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Actualizar Precio\n4.Consultar Precio");
+				opcion = sc.nextInt();
+			}
+			st.close();
+			conexionCrud.close();
+		} catch (Exception e) {
+			System.out.println("Error en la conexion " + e.getMessage());
+		} finally {
+			
+		}
+	}
+	
+}

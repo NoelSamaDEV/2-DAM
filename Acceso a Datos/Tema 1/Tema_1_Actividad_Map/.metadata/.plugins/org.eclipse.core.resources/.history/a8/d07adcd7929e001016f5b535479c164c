@@ -1,0 +1,15 @@
+package actividad1;
+
+public class Taller {
+	private Map <Matricula, Vehiculo> vehiculos;
+
+	public Taller() {
+		
+		this.vehiculos = new Hashtable<>();
+	}
+	
+	public void añadirVehiculo(Vehiculo v) {
+		
+		vehiculos.
+	}
+}

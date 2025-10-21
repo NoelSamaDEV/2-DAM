@@ -1,0 +1,159 @@
+package LibrosBiblio;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class AppCrudBiblio {
+    private static Connection conexionCrud;
+
+    public static void insertarLibro(Connection c, Libro l) {
+        Statement st = null;
+        String sql = "INSERT INTO libros (isbn, titulo, autor, precio) VALUES ('"
+                + l.getIsbn() + "','" + l.getTitulo() + "','" + l.getAutor() + "'," + l.getPrecio() + ")";
+        try {
+            st = c.createStatement();
+            int nRegistros = st.executeUpdate(sql); // executeUpdate para DML
+            if (nRegistros > 0) {
+                System.out.println("Registro insertado");
+            } else {
+                System.out.println("No se ha podido insertar");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al insertar " + e.getMessage());
+        } finally {
+            try { if (st != null) st.close(); } catch (Exception ignore) {}
+        }
+    }
+
+    public static void borrarAutor(Connection c, String autor) {
+        Statement st = null;
+        String sql = "DELETE FROM libros WHERE autor='" + autor + "'";
+        try {
+            st = c.createStatement();
+            int nRegistros = st.executeUpdate(sql); // executeUpdate para DML
+            if (nRegistros > 0) {
+                System.out.println("Registro borrado(s): " + nRegistros);
+            } else {
+                System.out.println("No se ha podido borrar");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al borrar " + e.getMessage());
+        } finally {
+            try { if (st != null) st.close(); } catch (Exception ignore) {}
+        }
+    }
+
+    // >>> Cambiado: recibe la Connection por parámetro <<<
+    public static void actualizarPrecios(Connection c, double prec, double desc) {
+        Statement st = null;
+        String sql = "UPDATE libros SET precio = precio - precio * " + desc + " WHERE precio > " + prec;
+        try {
+            if (c == null) {
+                throw new RuntimeException("Conexión nula al actualizar precios.");
+            }
+            st = c.createStatement();
+            int nRegistros = st.executeUpdate(sql);
+            if (nRegistros > 0) {
+                System.out.println("Registros actualizados: " + nRegistros);
+            } else {
+                System.out.println("No se ha podido actualizar");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al actualizar precios " + e.getMessage());
+        } finally {
+            try { if (st != null) st.close(); } catch (Exception ignore) {}
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Statement st = null;
+        int opcion = 0;
+        Scanner sc = null;
+        AccesoDatos ac = null;
+        double descuento;
+        double precioUsuario = 0.0;
+        String sql3 = "SELECT titulo, autor, precio FROM libros WHERE precio >= ";
+        ResultSet rs = null;
+        Libro l1 = null;
+        String isbn, titulo, autor;
+
+        try {
+            ac = new AccesoDatos("biblios");
+            // IMPORTANTE: usamos la estática, no declaramos otra local
+            conexionCrud = ac.getConnection();
+            if (conexionCrud == null) {
+                throw new RuntimeException("No se obtuvo la conexión (es null). Revisa AccesoDatos.");
+            }
+
+            st = conexionCrud.createStatement();
+            sc = new Scanner(System.in);
+
+            System.out.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Consultar Precio\n4.Actualizar Precio\n0.Salir");
+            opcion = sc.nextInt();
+
+            while (opcion != 0) {
+
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Introduzca isbn, titulo, autor, precio");
+                        isbn = sc.next();
+                        titulo = sc.next();
+                        autor = sc.next();
+                        precioUsuario = sc.nextDouble();
+                        l1 = new Libro(isbn, titulo, autor, precioUsuario);
+                        insertarLibro(conexionCrud, l1);
+                        break;
+
+                    case 2:
+                        System.out.println("Introduzca autor a borrar");
+                        autor = sc.next();
+                        borrarAutor(conexionCrud, autor);
+                        break;
+
+                    case 3:
+                        System.out.println("Introduzca el precio a consultar");
+                        precioUsuario = sc.nextDouble();
+                        rs = st.executeQuery(sql3 + precioUsuario);
+                        while (rs.next()) {
+                            // Ajusta si tu constructor requiere ISBN
+                            l1 = new Libro(rs.getString("titulo"), rs.getString("autor"), rs.getDouble("precio"));
+                            System.out.println(l1.toString());
+                        }
+                        rs.close();
+                        break;
+
+                    case 4:
+                        System.out.println("Introduzca el precio mínimo");
+                        precioUsuario = sc.nextDouble();
+                        System.out.println("Introduzca el descuento (ej. 0.1 para 10%)");
+                        descuento = sc.nextDouble();
+                        // >>> Pasamos la conexión aquí <<<
+                        actualizarPrecios(conexionCrud, precioUsuario, descuento);
+                        break;
+
+                    case 0:
+                        System.out.println("Fin de operaciones SQL");
+                        break;
+
+                    default:
+                        System.out.println("Opcion no valida");
+                }
+
+                System.out.println("Introduzca la opcion\n1.Insertar\n2.Borrar\n3.Consultar Precio\n4.Actualizar Precio\n0.Salir");
+                opcion = sc.nextInt();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en la conexion " + e.getMessage());
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception ignore) {}
+            try { if (st != null) st.close(); } catch (Exception ignore) {}
+            try { if (conexionCrud != null) conexionCrud.close(); } catch (Exception ignore) {}
+            if (sc != null) sc.close();
+        }
+    }
+}
+

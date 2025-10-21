@@ -1,0 +1,49 @@
+package Logica;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class matricula {
+	private int digitos;
+	private String letras;
+	
+	//set de matriculas ya usadas
+	private static Set<String> matriculas = new HashSet<>();
+	
+	/**
+	 * Intenta añadir la matricula al set
+	 * @param matricula
+	 * @throws MatriculaException
+	 */
+	private static void añadeMatricula(String matricula) throws MatriculaException {
+		//si esta ya en el se, no me sirve
+		if(!matriculas.add(matricula)) {
+			throw new MatriculaException("Matricula repetida"); 
+		}
+	}
+	
+	
+	public static void compruebaMatricula(String matricula) throws MatriculaException {
+		
+		matricula = matricula.toUpperCase();
+		if (matricula.length()!=7) {
+			throw new MatriculaException("Longitud incorrecta");
+		}
+		// 4 digitos
+		// 3 letras
+		for (int i = 0; i < 4; i++) {
+			char c= matricula.charAt(i);
+			if (!Character.isDigit(c)) {
+				throw new MatriculaException("Lo primero no son digitos");
+			}
+		}
+		for (int i = 4; i < 7; i++) {
+			char c=matricula.charAt(i);
+			if(!Character.isLetter(c)) {
+				throw new MatriculaException("Lo segundo no son numeros");
+			}
+		}
+		añadeMatricula(matricula);
+		
+	}
+}

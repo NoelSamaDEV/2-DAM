@@ -1,0 +1,8 @@
+package gestores;
+
+public interface Ficherable {
+	/**
+	 * Recibe una linea del fichero y devuelve un objeto de tipo restaurante
+	 */
+	Ficherable parse(String linea);
+}

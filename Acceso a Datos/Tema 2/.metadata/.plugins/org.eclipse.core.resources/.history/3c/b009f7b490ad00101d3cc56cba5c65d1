@@ -1,0 +1,88 @@
+package Persistencia;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import Principal.Coche;
+import Principal.LineaMalFormadaException;
+
+public class PersistenciaCSV implements persistencia {
+
+	@Override
+	public void leerCoches(String nombreFichero, List<Coche> listaCoches) {
+		BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(new File(nombreFichero)));
+			// primera linea de cabeceras
+			String linea = bufferedReader.readLine();
+			linea = bufferedReader.readLine();
+			while (linea != null) {
+				// trato la linea para hacer un coche
+				Coche c = trataLinea(linea);
+				if (c != null) {//si tengo un coche valido
+					listaCoches.add(c);
+				}
+				// leo la siguiente
+				linea = bufferedReader.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	private Coche trataLinea(String linea) {
+		Coche c = null;
+		try {
+			c = new Coche(linea);
+		} catch (LineaMalFormadaException e) {
+			System.out.println(e.getMessage());
+		}
+		return c;
+	}
+
+	@Override
+	public void escribirCoches(String nombreFichero, List<Coche> listaCoches) throws IOException {
+		BufferedWriter bufferedWriter = null;
+		
+		try {
+			bufferedWriter = new BufferedWriter(new FileWriter(new File(nombreFichero)));
+			// primero cabeceras
+			bufferedWriter.write("id;marca;modelo"+"\n");
+			for (Coche c : listaCoches) {
+				bufferedWriter.write(c.serialize()+"\n");
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (bufferedWriter != null) {
+				try {
+					bufferedWriter.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+
+}

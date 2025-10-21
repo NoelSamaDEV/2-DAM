@@ -1,0 +1,63 @@
+package parte2_1;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Ejercicio1 {
+
+	public static void main(String[] args) {
+		
+		File raiz =new File("src","parte2_1");
+		
+		File fichero =new File(raiz ,"restaurantes.csv");
+		//System.out.println(fichero.exists());
+		FileReader reader = null;
+		BufferedReader buffer = null;
+		try {
+			reader = new FileReader(fichero);
+			buffer = new BufferedReader(reader);
+			imprimeFichero(buffer);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Cagaste");
+			e.printStackTrace();
+		}
+		finally {
+			if(buffer!=null) {
+				try {
+					buffer.close();
+				}catch (IOException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+			
+			if(reader!=null) {
+				try {
+					reader.close();
+				}catch (IOException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	private static void imprimeFichero(BufferedReader buffer) throws IOException {
+		//imprimir con numero de fila
+		int contador = 0;
+		String linea = buffer.readLine();
+		while(linea!= null) {
+			System.out.printf("%d %s\n", contador, linea);
+			//avanzo contador
+			contador++;
+			//leo la siguiente linea
+			linea= buffer.readLine();		}
+	}
+
+}

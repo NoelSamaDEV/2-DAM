@@ -1,0 +1,6 @@
+package Logica;
+
+public class matricula {
+	private int digitos;
+	private String letras;
+}

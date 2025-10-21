@@ -1,0 +1,11 @@
+package Principal;
+
+public class LineaMalFormadaException extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+	private static final String MENSAJE="La linea esta mal formada: ";
+	
+	public LineaMalFormadaException(String linea) {
+		super(String.format("%s %s", MENSAJE, linea));
+	}
+}

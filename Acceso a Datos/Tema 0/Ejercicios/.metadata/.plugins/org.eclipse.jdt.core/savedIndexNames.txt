@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\noels\OneDrive\Desktop\AD\Tema 0\Ejercicios\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+862540917.index
+1241965860.index

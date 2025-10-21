@@ -1,0 +1,9 @@
+package Logica;
+
+public class MatriculaException extends Exception {
+
+	public MatriculaException(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,62 @@
+package gestores;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collection;
+
+import parte2.EscribeFicheroException;
+import parte2.LeeFicheroException;
+import parte2.Restaurante;
+
+public interface Documentable {
+	/**
+	 * Recibe una linea del fichero y devuelve un objeto de tipo restaurante
+	 */
+	static Documentable parse(String linea) {
+		throw new UnsupportedOperationException("Implementame");
+	}
+	
+	/**
+	 * Devuelve la linea que iria al fichero
+	 */
+	
+	abstract String aFichero();
+	
+	
+	/** Dado un nombre de fichero y un coleccion de restaurantes
+	 * los escribe fila a fila. Todas las excepciones se 
+	 * propagan como EscribeFicheroException
+	 * @throws LeeFicheroException 
+	 * @throws EscribeFicheroException 
+	 */
+	public static void escribeFichero(String nombre,
+			Collection<Restaurante> restaurantes) throws EscribeFicheroException {
+		BufferedWriter bw =null;
+		
+		try {
+			bw =new BufferedWriter(
+				   new FileWriter(
+					    new File(nombre)
+						)
+							);
+			//cabeceras
+			bw.write("restaurant,Address,City,State,Zipcode\n");
+			for(Restaurante r: restaurantes) {
+				bw.write(r.aFichero()+"\n");
+			}
+		} catch (IOException e) {
+			throw new EscribeFicheroException(e.getMessage());
+		}
+		finally {
+			if(bw!=null) {
+				try {
+					bw.close();
+				} catch (IOException e) {
+					throw new EscribeFicheroException(e.getMessage());
+				}
+			}
+		}
+	}
+}
