@@ -13,7 +13,7 @@ class MiHilo extends Thread {
         for (int i = 1; i <= 5; i++) {
             System.out.println(nombre + " está en ejecución, iteración: " + i);
             try {
-                Thread.sleep(500); // Pausa de 500ms para simular un trabajo
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 System.out.println(nombre + " fue interrumpido.");
             }
@@ -28,7 +28,7 @@ public class HiloConThread {
         MiHilo hilo1 = new MiHilo("Hilo 1");
         MiHilo hilo2 = new MiHilo("Hilo 2");
 
-        hilo1.start(); // Inicia el hilo
+        hilo1.start();
         hilo2.start();
     }
 }
