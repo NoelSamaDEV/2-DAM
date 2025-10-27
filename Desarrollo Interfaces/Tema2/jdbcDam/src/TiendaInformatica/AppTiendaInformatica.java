@@ -107,7 +107,7 @@ public class AppTiendaInformatica {
 		try {
 			fw = new FileWriter("CopiaSeguridadArticulos.txt");
 			fw.write("Codigo;Nombre;Precio;Fabricante\n");
-			st = cn.createStatement();
+			st = cn.createStatement();//el resulset sea despladable, modificable
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
 				realizado = true;
@@ -125,6 +125,29 @@ public class AppTiendaInformatica {
 		return false;
 	}
 	
+	public static void actualizacionEspecial() {
+		Statement st = null;
+		ResultSet rs = null;
+		String sql = "Select * from articulo";
+		try {
+			st = cn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			rs= st.executeQuery(sql);
+			/*
+			rs.afterLast();
+			while (rs.previous()) {
+				
+			}
+			*/
+			rs.absolute(2);
+			rs.updateString(2, "Tinta Liquida");
+			rs.updateRow();
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+	}
+	
 	public static void main(String[] args) {
 		int opcion=0;
 		Scanner sc = new Scanner(System.in);
@@ -139,6 +162,7 @@ public class AppTiendaInformatica {
 						+ "\n3.- Borrar Articulo por Precio"
 						+ "\n4.- Actualizar Precio por Fabricante"
 						+ "\n5.- Copia de Seguridad en fichero texto"
+						+ "\n6.- Actualizacion desde ResulSet"
 						+ "\n0.- Salir");
 				opcion = sc.nextInt();
 				switch (opcion) {
@@ -175,6 +199,10 @@ public class AppTiendaInformatica {
 					} else {
 						System.out.println("Error al realizar la copia de seguridad");
 					}
+					break;
+				case 6:
+					actualizacionEspecial();
+					System.out.println("Actualizacion realizada correctamente");
 					break;
 				case 0:
 					System.out.println("Saliendo...");

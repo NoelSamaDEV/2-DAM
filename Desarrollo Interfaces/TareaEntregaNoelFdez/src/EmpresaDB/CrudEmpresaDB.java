@@ -64,12 +64,13 @@ public class CrudEmpresaDB {
 					break;
 			    // Borrar Empleados Departamento
 				case 3:
-                    System.out.println("Introduzca el departamento a borrar:");
-                    int depto = sc.nextInt();
-                    String sql="DELETE FROM empleado WHERE departamento=" + depto;
-                    int borrados = borrarEmpleadosDepartamento(depto, sql);
-                    System.out.println("Se han borrado " + borrados + " registros.");
-					break;
+					sc.nextLine(); // limpiar buffer del scanner
+				    System.out.println("Introduzca el NOMBRE del departamento a borrar:");
+				    String nombreDepto = sc.nextLine();
+
+				    int borrados = borrarEmpleadosDepartamento(nombreDepto);
+				    System.out.println("Se han borrado " + borrados + " registros.");
+				    break;
 				// Actualizar Salarios
 				case 4:
 					int actualizados = actualizarSalarios();
@@ -236,17 +237,25 @@ public class CrudEmpresaDB {
 	 * @param sql
 	 * @return nRegistros
 	 */
-	private static int borrarEmpleadosDepartamento(int departamento, String sql) {
+	private static int borrarEmpleadosDepartamento(String nombreDepto) {
 		Statement st = null;
-		int nRegistros=0;
-		try {
-			st = cn.createStatement();
-			nRegistros = st.executeUpdate(sql);
-			st.close();	
-		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
-		}
-		return nRegistros;
+	    int nRegistros = 0;
+
+	    // SQL con INNER JOIN para eliminar empleados por nombre de departamento
+	    String sql = "DELETE e " +
+	                 "FROM empleado e " +
+	                 "INNER JOIN departamento d ON e.departamento = d.codigo " +
+	                 "WHERE d.nombre = '" + nombreDepto + "'";
+
+	    try {
+	        st = cn.createStatement();
+	        nRegistros = st.executeUpdate(sql);
+	        st.close();
+	    } catch (Exception e) {
+	        System.out.println("Error al borrar empleados del departamento '" + nombreDepto + "': " + e.getMessage());
+	    }
+
+	    return nRegistros;
 	}
 	
 	/**

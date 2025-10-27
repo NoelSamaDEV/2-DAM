@@ -1,7 +1,9 @@
 Codigo;Nombre;Apellidos;Salario;Hijos;Departamento
 Empleado [codigo=1, nombre=Ana, apellidos=García López, salario=24000.0, hijos=1, departamento=1]
+Empleado [codigo=2, nombre=Luis, apellidos=Pérez Martín, salario=28500.0, hijos=0, departamento=2]
 Empleado [codigo=3, nombre=Marta, apellidos=Suárez Díaz, salario=32500.0, hijos=3, departamento=3]
 Empleado [codigo=4, nombre=Noelia, apellidos=Fernández Álvarez, salario=27000.0, hijos=0, departamento=3]
 Empleado [codigo=5, nombre=Carlos, apellidos=Iglesias Prieto, salario=22000.0, hijos=0, departamento=4]
 Empleado [codigo=6, nombre=Lucía, apellidos=Marín Ortega, salario=26000.0, hijos=1, departamento=1]
+Empleado [codigo=7, nombre=Noel, apellidos=Fernandez, salario=24400.0, hijos=0, departamento=2]
 Fin de la copia de seguridad.
