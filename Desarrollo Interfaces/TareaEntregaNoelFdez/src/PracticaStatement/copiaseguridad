@@ -1,0 +1,6 @@
+Codigo;Nombre;Apellidos;Salario;Hijos;Departamento
+Empleado [codigo=1, nombre=Ana, apellidos=García López, salario=32998.9, hijos=1, departamento=1]
+Empleado [codigo=3, nombre=Marta, apellidos=Suárez Díaz, salario=35750.0, hijos=3, departamento=3]
+Empleado [codigo=6, nombre=Lucía, apellidos=Marín Ortega, salario=28600.000000000004, hijos=1, departamento=1]
+Empleado [codigo=101, nombre=Juan, apellidos=Pérez, salario=3000.0, hijos=2, departamento=1]
+Fin de la copia de seguridad.

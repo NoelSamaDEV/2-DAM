@@ -148,6 +148,43 @@ public class AppTiendaInformatica {
 		}
 	}
 	
+	public static void insertarDesdeResultSet() {
+		Statement st = null;
+		ResultSet rs = null;
+		String sql = "Select * from articulo";
+		try {
+			st = cn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			rs = st.executeQuery(sql);
+			rs.moveToInsertRow();
+			rs.updateInt(1, 10);
+			rs.updateString(2, "Tablet");
+			rs.updateDouble(3, 250.0);
+			rs.updateInt(4, 4);
+			rs.insertRow();
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+	}
+	
+	public static void eliminarDesdeResultSet() {
+		Statement st = null;
+		ResultSet rs = null;
+		String sql = "Select * from articulo";
+		try {
+			st = cn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			rs = st.executeQuery(sql);
+			rs.absolute(3);
+			rs.deleteRow();
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		int opcion=0;
 		Scanner sc = new Scanner(System.in);
@@ -203,6 +240,14 @@ public class AppTiendaInformatica {
 				case 6:
 					actualizacionEspecial();
 					System.out.println("Actualizacion realizada correctamente");
+					break;
+				case 7:
+					insertarDesdeResultSet();
+					System.out.println("Insercion realizada correctamente");
+					break;
+				case 8:
+					eliminarDesdeResultSet();
+					System.out.println("Eliminacion realizada correctamente");
 					break;
 				case 0:
 					System.out.println("Saliendo...");

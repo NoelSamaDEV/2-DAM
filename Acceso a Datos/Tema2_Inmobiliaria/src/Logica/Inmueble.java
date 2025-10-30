@@ -7,11 +7,10 @@ public class Inmueble {
 	private String codEmpleado;
 	private double precio;
 	
-	public Inmueble(String codInmueble, String direccion, String tipo, String codEmpleado, double precio) {
+	public Inmueble(String codInmueble, String direccion, String tipo, double precio) {
 		this.codInmueble = codInmueble;
 		this.direccion = direccion;
 		this.tipo = tipo;
-		this.codEmpleado = codEmpleado;
 		this.precio = precio;
 	}
 	
