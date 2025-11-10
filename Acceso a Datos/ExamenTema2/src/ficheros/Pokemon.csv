@@ -1,0 +1,152 @@
+Id;Nombre;Tipo;Salud;Ataque;Defensa;Habilidad
+1;Bulbasaur;Planta;45;49;49;Espesura
+2;Ivysaur;Planta;60;62;63;Espesura
+3;Venusaur;Planta;80;82;83;Espesura
+4;Charmander;Fuego;39;52;43;Mar Llamas
+5;Charmeleon;Fuego;58;64;58;Mar Llamas
+6;Charizard;Fuego;78;84;78;Mar Llamas
+7;Squirtle;Agua;44;48;65;Torrente
+8;Wartortle;Agua;59;63;80;Torrente
+9;Blastoise;Agua;79;83;100;Torrente
+10;Caterpie;Bicho;45;30;35;Polvo Escudo
+11;Metapod;Bicho;50;20;55;Mudar
+12;Butterfree;Bicho;60;45;50;Ojo Compuesto
+13;Weedle;Bicho;40;35;30;Polvo Escudo
+14;Kakuna;Bicho;45;25;50;Mudar
+15;Beedrill;Bicho;65;90;40;Enjambre
+16;Pidgey;Normal;40;45;40;Vista Lince
+17;Pidgeotto;Normal;63;60;55;Vista Lince
+18;Pidgeot;Normal;83;80;75;Vista Lince
+19;Rattata;Normal;30;56;35;Fuga
+20;Raticate;Normal;55;81;60;Fuga
+21;Spearow;Normal;40;60;30;Vista Lince
+22;Fearow;Normal;65;90;65;Vista Lince
+23;Ekans;Veneno;35;60;44;Intimidación
+24;Arbok;Veneno;60;85;69;Intimidación
+25;Pikachu;Eléctrico;35;55;40;Electricidad Estática
+26;Raichu;Eléctrico;60;90;55;Electricidad Estática
+27;Sandshrew;Tierra;50;75;85;Velo Arena
+28;Sandslash;Tierra;75;100;110;Velo Arena
+29;Nidoran♀;Veneno;55;47;52;Punto Tóxico
+30;Nidorina;Veneno;70;62;67;Punto Tóxico
+31;Nidoqueen;Veneno;90;92;87;Punto Tóxico
+32;Nidoran♂;Veneno;46;57;40;Punto Tóxico
+33;Nidorino;Veneno;61;72;57;Punto Tóxico
+34;Nidoking;Veneno;81;102;77;Punto Tóxico
+35;Clefairy;Hada;70;45;48;Gran Encanto
+36;Clefable;Hada;95;70;73;Gran Encanto
+37;Vulpix;Fuego;38;41;40;Absorbe Fuego
+38;Ninetales;Fuego;73;76;75;Absorbe Fuego
+39;Jigglypuff;Normal;115;45;20;Gran Encanto
+40;Wigglytuff;Normal;140;70;45;Gran Encanto
+41;Zubat;Veneno;40;45;35;Foco Interno
+42;Golbat;Veneno;75;80;70;Foco Interno
+43;Oddish;Planta;45;50;55;Clorofila
+44;Gloom;Planta;60;65;70;Clorofila
+45;Vileplume;Planta;75;80;85;Clorofila
+46;Paras;Bicho;35;70;55;Efecto Espora
+47;Parasect;Bicho;60;95;80;Efecto Espora
+48;Venonat;Bicho;60;55;50;Ojo Compuesto
+49;Venomoth;Bicho;70;65;60;Ojo Compuesto
+50;Diglett;Tierra;10;55;25;Velo Arena
+51;Dugtrio;Tierra;35;100;50;Velo Arena
+52;Meowth;Normal;40;45;35;Recogida
+53;Persian;Normal;65;70;60;Energía Pura
+54;Psyduck;Agua;50;52;48;Aclimatación
+55;Golduck;Agua;80;82;78;Aclimatación
+56;Mankey;Lucha;40;80;35;Espíritu Vital
+57;Primeape;Lucha;65;105;60;Espíritu Vital
+58;Growlithe;Fuego;55;70;45;Intimidación
+59;Arcanine;Fuego;90;110;80;Intimidación
+60;Poliwag;Agua;40;50;40;Absorbe Agua
+61;Poliwhirl;Agua;65;65;65;Absorbe Agua
+62;Poliwrath;Agua;90;95;95;Absorbe Agua
+63;Abra;Psíquico;25;20;15;Foco Interno
+64;Kadabra;Psíquico;40;35;30;Foco Interno
+65;Alakazam;Psíquico;55;50;45;Foco Interno
+66;Machop;Lucha;70;80;50;Agallas
+67;Machoke;Lucha;80;100;70;Agallas
+68;Machamp;Lucha;90;130;80;Agallas
+69;Bellsprout;Planta;50;75;35;Clorofila
+70;Weepinbell;Planta;65;90;50;Clorofila
+71;Victreebel;Planta;80;105;65;Clorofila
+72;Tentacool;Agua;40;40;35;Cuerpo Puro
+73;Tentacruel;Agua;80;70;65;Cuerpo Puro
+74;Geodude;Roca;40;80;100;Cabeza Roca
+75;Graveler;Roca;55;95;115;Cabeza Roca
+76;Golem;Roca;80;120;130;Cabeza Roca
+77;Ponyta;Fuego;50;85;55;Fuga
+78;Rapidash;Fuego;65;100;70;Fuga
+79;Slowpoke;Agua;90;65;65;Ritmo Propio
+80;Slowbro;Agua;95;75;110;Ritmo Propio
+81;Magnemite;Eléctrico;25;35;70;Robustez
+82;Magneton;Eléctrico;50;60;95;Robustez
+83;Farfetch’d;Normal;52;90;55;Foco Interno
+84;Doduo;Normal;35;85;45;Fuga
+85;Dodrio;Normal;60;110;70;Fuga
+86;Seel;Agua;65;45;55;Sebo
+87;Dewgong;Agua;90;70;80;Sebo
+88;Grimer;Veneno;80;80;50;Hedor
+89;Muk;Veneno;105;105;75;Hedor
+90;Shellder;Agua;30;65;100;Caparazón
+91;Cloyster;Agua;50;95;180;Caparazón
+92;Gastly;Fantasma;30;35;30;Levitación
+93;Haunter;Fantasma;45;50;45;Levitación
+94;Gengar;Fantasma;60;65;60;Levitación
+95;Onix;Roca;35;45;160;Cabeza Roca
+96;Drowzee;Psíquico;60;48;45;Insomnio
+97;Hypno;Psíquico;85;73;70;Insomnio
+98;Krabby;Agua;30;105;90;Caparazón
+99;Kingler;Agua;55;130;115;Caparazón
+100;Voltorb;Eléctrico;40;30;50;Insonorizar
+101;Electrode;Eléctrico;60;50;70;Insonorizar
+102;Exeggcute;Planta;60;40;80;Clorofila
+103;Exeggutor;Planta;95;95;85;Clorofila
+104;Cubone;Tierra;50;50;95;Cabeza Roca
+105;Marowak;Tierra;60;80;110;Cabeza Roca
+106;Hitmonlee;Lucha;50;120;53;Flexibilidad
+107;Hitmonchan;Lucha;50;105;79;Flexibilidad
+108;Lickitung;Normal;90;55;75;Despiste
+109;Koffing;Veneno;40;65;95;Levitación
+110;Weezing;Veneno;65;90;120;Levitación
+111;Rhyhorn;Tierra;80;85;95;Cabeza Roca
+112;Rhydon;Tierra;105;130;120;Cabeza Roca
+113;Chansey;Normal;250;5;5;Dicha
+114;Tangela;Planta;65;55;115;Clorofila
+115;Kangaskhan;Normal;105;95;80;Madrugar
+116;Horsea;Agua;30;40;70;Nado Rápido
+117;Seadra;Agua;55;65;95;Punto Tóxico
+118;Goldeen;Agua;45;67;60;Nado Rápido
+119;Seaking;Agua;80;92;65;Nado Rápido
+120;Staryu;Agua;30;45;55;Cura Natural
+121;Starmie;Agua;60;75;85;Cura Natural
+122;Mr. Mime;Psíquico;40;45;65;Filtro
+123;Scyther;Bicho;70;110;80;Enjambre
+124;Jynx;Hielo;65;50;35;Alerta
+125;Electabuzz;Eléctrico;65;83;57;Electricidad Estática
+126;Magmar;Fuego;65;95;57;Cuerpo Llama
+127;Pinsir;Bicho;65;125;100;Corte Fuerte
+128;Tauros;Normal;75;100;95;Intimidación
+129;Magikarp;Agua;20;10;55;Nado Rápido
+130;Gyarados;Agua;95;125;79;Intimidación
+131;Lapras;Agua;130;85;80;Absorbe Agua
+132;Ditto;Normal;48;48;48;Flexibilidad
+133;Eevee;Normal;55;55;50;Fuga
+134;Vaporeon;Agua;130;65;60;Absorbe Agua
+135;Jolteon;Eléctrico;65;65;60;Absorbe Electricidad
+136;Flareon;Fuego;65;130;60;Absorbe Fuego
+137;Porygon;Normal;65;60;70;Descarga
+138;Omanyte;Roca;35;40;100;Caparazón
+139;Omastar;Roca;70;60;125;Caparazón
+140;Kabuto;Roca;30;80;90;Caparazón
+141;Kabutops;Roca;60;115;105;Caparazón
+142;Aerodactyl;Roca;80;105;65;Cabeza Roca
+143;Snorlax;Normal;160;110;65;Inmunidad
+144;Articuno;Hielo;90;85;100;Presión
+145;Zapdos;Eléctrico;90;90;85;Presión
+146;Moltres;Fuego;90;100;90;Presión
+147;Dratini;Dragón;41;64;45;Mudar
+148;Dragonair;Dragón;61;84;65;Mudar
+149;Dragonite;Dragón;91;134;95;Foco Interno
+150;Mewtwo;Psíquico;106;110;90;Presión
+151;Mew;Psíquico;100;100;100;Sincronía

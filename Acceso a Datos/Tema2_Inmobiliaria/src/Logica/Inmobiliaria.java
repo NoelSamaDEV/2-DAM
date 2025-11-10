@@ -26,7 +26,7 @@ public class Inmobiliaria {
 	}
 	
 	public int guardaDatos(String nombreFicheroEmpleados, String nombreFicheroInmuebles) {
-
+		
 		return 0;
 	}
 	

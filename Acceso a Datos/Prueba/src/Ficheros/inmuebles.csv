@@ -1,0 +1,7 @@
+codInmueble;direccion;tipo;codEmpleado;precio
+codA;AAA;piso;cod1;150000
+codB;BBB;piso;cod1;160000
+codC;CCC;chalet;codB;250000
+codD;DDD;piso;cod2;3OO000
+codE;EEE;;cod2;140000
+codF;FFF;chalet;cod3150,;250000
