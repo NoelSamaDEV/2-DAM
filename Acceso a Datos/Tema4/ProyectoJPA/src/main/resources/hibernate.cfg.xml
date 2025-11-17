@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-5.3.dtd">
+        
+<hibernate-configuration>
+    <session-factory>
+    
+        <!-- === Conexión a la base de datos === -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/empleadosJpa</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Samadegrao1</property>
+        
+        <!-- === Dialecto (traduce HQL a SQL específico del motor) === -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <!-- === Configuración opcional === -->
+        <!-- hibernate.hbm2ddl.auto
+        create : elimina y crea todas las tablas cada vez 
+        que inicia.
+        create-drop: gual que create, pero borra las tablas 
+        al cerrar la sesión.
+        update: modifica el esquema si encuentra diferencias 
+        (sin borrar datos, pero puede crear columnas nuevas).
+        validate: solo valida que las tablas existen y 
+        coinciden con las entidades.
+        none: no hace absolutamente nada con el esquema.-->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- === Clases anotadas (entidades) === -->
+        <mapping class="entidad.Empleado"/>
+        <mapping class="entidad.Departamento"/>
+
+    </session-factory>
+</hibernate-configuration>
