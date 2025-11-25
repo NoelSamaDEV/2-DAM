@@ -3,18 +3,19 @@ package entidad;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.Table;
+
 
 @Entity
-@Table(appliesTo = "propietario")
+@Table(name = "propietario")
 public class Propietario {
 	@Id
 	private String dni;
 	@Column
 	private String nombre;
 	@Column
-	private String edad;
+	private int edad;
 
 	public String getDni() {
 		return dni;
@@ -32,11 +33,11 @@ public class Propietario {
 		this.nombre = nombre;
 	}
 
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 
